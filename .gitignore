@@ -26,3 +26,6 @@ coverage
 # Yarn
 .pnp.*
 .yarn/
+
+#Wrangler.jsonc
+wrangler.jsonc
