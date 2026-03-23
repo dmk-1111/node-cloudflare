@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "drizzle-orm": "^0.45.1",
+    "ejs": "^5.0.1",
     "hono": "^4.12.8"
   },
   "devDependencies": {
