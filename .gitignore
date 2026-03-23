@@ -1,5 +1,5 @@
 # Core Dependencies
-node_modules/
+node_modules
 jspm_packages/
 
 # Logs and Debug
@@ -27,5 +27,5 @@ coverage
 .pnp.*
 .yarn/
 
-#Wrangler.jsonc
+
 wrangler.jsonc
