@@ -2,15 +2,20 @@ import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { getDB } from "./db"
 import { sql } from "drizzle-orm";
-import { employees } from "./schema"
+import { home } from "./views/home.js"
+import { menu } from "./views/menu.js"
 const app = new Hono()
 
 // MIDDLEWARE
 app.use("*", cors());
 
 app.get("/", (c) => {
-  return c.text("API running 🚀")
-})
+  return c.html(home)
+});
+
+app.get("/menu", (c) => {
+  return c.html(menu)
+});
 
 app.get("/setup", async (c) => {
   try {
@@ -99,15 +104,15 @@ app.get("/setup", async (c) => {
   }
 });
 
-app.get("/show-employees", async (c) => {
-  try {
-    const db = getDB(c.env)
-    const data = await db.select().from(employees).all()
-    return c.json(data)
-  } catch (err) {
-    return c.text(err.message, 500)
-  }
-})
+// app.get("/show-employees", async (c) => {
+//   try {
+//     const db = getDB(c.env)
+//     const data = await db.select().from(employees).all()
+//     return c.json(data)
+//   } catch (err) {
+//     return c.text(err.message, 500)
+//   }
+// })
 
 app.get("/add-employees", async (c) => {
   try{
