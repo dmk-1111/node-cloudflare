@@ -1,31 +1,27 @@
 import { header } from "./header.js"
 import { footer } from "./footer.js"
+import { menuScript } from "./scripts/menu-script.js"
 export const menu = `
     ${header}
         <div class="col-md-12 p-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4>Menu List</h4>
-                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#createMenu">+ Add Menu</button>
+                <button class="btn btn-sm btn-outline-success btn-create" data-bs-toggle="modal" data-bs-target="#createMenu">+ Add Menu</button>
             </div>
             <table class="table table-striped">
-                <tr>
-                    <th>#</th>
-                    <th class="w-50">NAME</th>
-                    <th>STATUS</th>
-                    <th>ACTION</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Menu 1</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editMenu">Edit</button>
-                        <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteMenu">Delete</button>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="w-50">NAME</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="menuTable">
+                   
+                </tbody>                
             </table>
+            <div id="pagination" class="mt-3 d-flex justify-content-end"></div>
         </div>
 
         <!-- Modal Create -->
@@ -37,21 +33,21 @@ export const menu = `
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">            
-                        <form action="/menu" method="POST">
+                        <form action="/create-menu" method="POST">                            
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="status" checked>
-                                    <label class="form-check-label" for="status">
+                                    <input class="form-check-input" type="radio" value="1" name="status" id="status1" checked>
+                                    <label class="form-check-label" for="status1">
                                         Enabled
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="status1">
-                                    <label class="form-check-label" for="status1">
+                                    <input class="form-check-input" type="radio" value="0" name="status" id="status0">
+                                    <label class="form-check-label" for="status0">
                                         Disabled
                                     </label>
                                 </div>
@@ -74,21 +70,21 @@ export const menu = `
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">            
-                        <form action="/menu" method="POST">
+                        <form action="" method="POST" id="editForm">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="status" checked>
-                                    <label class="form-check-label" for="status">
+                                    <input class="form-check-input" type="radio" name="status" value="1" id="status1">
+                                    <label class="form-check-label" for="status1">
                                         Enabled
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="status1">
-                                    <label class="form-check-label" for="status1">
+                                    <input class="form-check-input" type="radio" name="status" value="0" id="status0">
+                                    <label class="form-check-label" for="status0">
                                         Disabled
                                     </label>
                                 </div>
@@ -111,7 +107,7 @@ export const menu = `
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">            
-                        <form action="/menu" method="POST">
+                        <form action="" method="POST" id="deleteForm">
                             <div class="mb-3">
                                 <h6>Are you sure, do you want to delete this menu?</h6>
                             </div>
@@ -124,5 +120,9 @@ export const menu = `
                 </div>
             </div>
         </div>
+        
+        <!-- Script -->
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        ${menuScript}
     ${footer}
 `
